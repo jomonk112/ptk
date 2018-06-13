@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form>
+    <table border="" align="center">
+        <tr>
+            <td>No</td>
+            <td>Name</td>
+            <td>price</td>
+            <td>image</td>
+        </tr>
+        {% for i in d %}
+        <tr>
+            <td>{{ loop.index }}</td>
+             <td>{{ i[0] }}</td>
+             <td>{{ i[1] }}</td>
+             <td>{{ i[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+</body>
+</html>

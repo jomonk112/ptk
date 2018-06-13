@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="static/jquery.js"></script>
+<body>
+
+<table>
+<td>
+<table border="">
+    <form method="post" action="/add_p">
+    <tr><td>category:</td><td><input type="text" name="pname"></td>
+        </tr>
+    <tr><td></td><td><input type="submit" value="add" name="add"></td>
+    </tr>
+    </form>
+</table></td>
+<td>
+    <table>
+
+    <tr><td>search here:</td><td><input type="text" id="search1"></td>
+        </tr>
+    <tr><td></td><td><input type="button" value="search" id="ser"></td>
+    </tr>
+    </table>
+</td>
+
+    <td>
+        <table id="tb">
+
+        </table>
+    </td>
+    <br>
+<table><tr>
+<td>
+    <table border="">
+        <tr>
+            <td>no</td>
+            <td>category</td>
+            <td>delete</td>
+            <td>view</td>
+        </tr>
+        {% for i in s %}
+            <tr>
+
+            <td>{{ i[0] }}</td>
+            <td>{{ i[1] }}</td>
+            <td><a href="/del/{{ i[0]}}">delete</a></td>
+            <td><a href="/view/{{ i[0]}}">view</a></td>
+            {% endfor %}
+        </tr>
+    </table>
+</td>
+    <td></td>
+<td></td>
+
+   </tr>
+</table>
+<td>
+    <table id="tb" border="1">
+
+    </table>
+    </td>
+</table>
+</body>
+
+<script>
+    $(document).ready(function () {
+
+        $("#ser").click(function () {
+
+            a = $("#search1").val();
+            alert(a);
+            $.getJSON('/search', {
+                b:a
+            },function (data1) {
+                  $("#tb").text("");
+                    var a = data1.length;
+                    print(a);
+                    for (var i = 0; i < a; i++) {
+                        var name = data1[i]['pname'];
+                        var image = data1[i]['image'];
+                        var price = data1[i]['price'];
+
+                        $("#tb").append("<tr><td>" + name + "</td><td>" + '<img src="image" / >'+ "</td><td>" + price + "</td><td>");
+
+                    }
+                });
+        });
+    });
+    </script>
+</html>

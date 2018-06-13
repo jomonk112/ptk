@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="static/jquery.js"></script>
+<body>
+<table>
+    <tr><td>
+<table align="right"><tr><td>
+    search here<input type="text" name="s" id="search"></td><td>
+
+    <td><a href="/shop" ><img src="static/image/sss.jpg" id="cartIcon" height="50" width="50" /></a></td>
+    <td></td></tr>
+</table>
+    </td>
+     <td>
+         <table id="result">
+
+         </table>
+     </td>
+</tr>
+</table>
+<table><tr>
+
+<td><table border="1">
+<td>CATEGORIES</td>
+            {% for i in r %}
+            <tr><td>{{ loop.index }}</td><td><input type="checkbox" name="check" value="{{ i[0] }}" id="select">{{ i[1] }}</td></tr>
+            {% endfor %}
+
+</table></td>
+<td>
+            <table id="table1">
+            </table>
+
+</td>
+
+</tr>
+<td>
+    <table id="table">
+
+    </table>
+
+</td>
+</table>
+</td>
+<td>
+</td>
+</tr>
+
+</table>
+
+</body>
+
+
+<script>
+    $(document).ready(function () {
+        $("input[type='checkbox']").on('change', function() {
+            item=$(this).val();
+             $.getJSON('/checks', {
+                 category:item
+             },function (data2) {
+                  //  $("#table1").text("");
+                    var a = data2.length;
+                    for (var i = 0; i < a; i++) {
+                        var name = data2[i]['pname'];
+                        var image = data2[i]['image'];
+                        var price = data2[i]['price'];
+                        var p_id=data2[i]['pid'];
+                       // $("#table").append("<tr><td> <img src="+image+" width=50 height=50/> </td></tr><tr><td>" + name+"/"+price + "</td></tr>"+"<tr><td>"+"<a href='/add_cart/"+p_id+"'>add to cart</a>"+"</td></tr>");
+                       $("#table1").append("<tr><td> <img src="+image+" width=50 height=50/> </td></tr><tr><td>" + name+"/"+price + "</td></tr>"+"<tr><td>"+"<a href='/add_cart/"+p_id+"'>add to cart</a>"+"</td></tr>");
+
+                    }
+                });
+        });
+       // $("#select").dblclick(function () {
+         //   $(this).val().hide();
+        //});
+         // $("#select").on('change',function() {
+           // s=$(":checkbox:not(:checked)")
+             // alert(s)
+          //});
+        //  $("#select input:checkbox").change(function() {
+          //var ischecked= $(this).is(':checked');
+          //if(!ischecked)
+          //alert('uncheckd ' + $(this).val());
+           //});
+
+       // $('#select').change(function()
+       // {
+         // if(this.checked != true)
+          //{
+            //  $(this).val().hide();
+           //alert('you need to be fluent in English to apply for the job');
+        //  }
+        //});
+        $("#search").keyup(function () {
+            var n = $( "input:checked" ).length;
+            alert(n);
+                var item=[];
+                $(':checkbox:checked').each(function (i) {
+                    item[i]=$(this).val();
+                });
+
+            items=item.join(',');
+            alert(items);
+            a = $("#search").val();
+            alert(a);
+            $.getJSON('/search2', {
+                lists: items,
+                value: a
+
+            }, function (data1) {
+                $("#table1").text("");
+                var a = data1.length;
+                for (var i = 0; i < a; i++) {
+                    var name = data1[i]['pname'];
+                    var image = data1[i]['image'];
+                    var price = data1[i]['price'];
+                    var p_id=data1[i]['pid'];
+                    $("#table1").append("<tr><td> <img src="+image+" width=50 height=50/> </td></tr><tr><td>" + name+"/"+price + "</td></tr>"+"<tr><td>"+"<a href='/add_cart/"+p_id+"'>add to cart</a>"+"</td></tr>");
+
+                }
+
+            });
+        });
+    });
+    </script>
+</html>

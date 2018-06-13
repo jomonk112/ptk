@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+    <tr>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    {% for j in n %}
+    <tr>
+        <td><img src="{{ j[2] }}" width="50" height="50"/>
+        </td>
+    </tr>
+    <tr>
+        <td>{{ j[1] }}/{{ j[3] }}</td>
+    </tr>
+    <tr>
+        <td><a href="/remove/{{ j[0] }}">remove</a> </td>
+    </tr>
+    {% endfor %}
+        <td><input type="text" value="{{ p }}"></td>
+    </tr>
+</table>
+</body>
+</html>

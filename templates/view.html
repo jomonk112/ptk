@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<form>
+<form method="post" action=""></form>
+<h1>product details</h1>
+<table border="">
+    <tr>
+        <td>name</td>
+        <td>price</td>
+        <td>image</td>
+        <td>category</td>
+    </tr>
+
+    {% for i in d %}
+        <tr>
+        <td>{{ i[1] }}</td>
+        <td>{{ i[2]}}</td>
+
+        <td><img src="{{i[3]}}" height=50 width=50/>
+        </td>
+        <td>{{i[4]}}</td>
+         </tr>
+    {% endfor %}
+
+</table>
+</form>
+</body>
+</html>
